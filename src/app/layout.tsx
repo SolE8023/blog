@@ -7,6 +7,9 @@ import { Footer } from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Log.",
   description: "개발, 일상, 그리고 다양한 이야기들",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
