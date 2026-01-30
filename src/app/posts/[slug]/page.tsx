@@ -4,6 +4,7 @@ import Image from "next/image";
 import { createClient } from "@/lib/supabase-server";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { Comments } from "@/components/Comments";
+import { ViewCounter } from "@/components/ViewCounter";
 import { formatDate } from "@/lib/utils";
 import type { PostWithRelations, Category, Tag } from "@/types";
 
@@ -108,6 +109,8 @@ export default async function PostPage({ params }: PostPageProps) {
               <time className="text-body text-sm text-[var(--text-muted)]">
                 {formatDate(post.created_at)}
               </time>
+              <span className="text-[var(--text-muted)]">·</span>
+              <ViewCounter postId={post.id} />
             </div>
 
             {/* Title */}
