@@ -290,6 +290,8 @@ function ShareButton({
   );
 }
 
+const BASE_URL = "https://blog-eight-kohl-50.vercel.app";
+
 export async function generateMetadata({ params }: PostPageProps) {
   const { slug } = await params;
   const post = await getPost(slug);
@@ -300,8 +302,27 @@ export async function generateMetadata({ params }: PostPageProps) {
     };
   }
 
+  const url = `${BASE_URL}/posts/${slug}`;
+
   return {
-    title: `${post.title} | Log.`,
+    title: post.title,
     description: post.excerpt || undefined,
+    openGraph: {
+      type: "article",
+      locale: "ko_KR",
+      url,
+      title: post.title,
+      description: post.excerpt || undefined,
+      siteName: "Log.",
+      publishedTime: post.created_at,
+      modifiedTime: post.updated_at,
+      ...(post.thumbnail && { images: [{ url: post.thumbnail }] }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt || undefined,
+      ...(post.thumbnail && { images: [post.thumbnail] }),
+    },
   };
 }
