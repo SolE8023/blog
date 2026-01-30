@@ -25,6 +25,9 @@ export function DeletePostButton({ postId, postTitle }: DeletePostButtonProps) {
       // Delete post_tags first (foreign key constraint)
       await supabase.from("post_tags").delete().eq("post_id", postId);
 
+      // Delete post_views
+      await supabase.from("post_views").delete().eq("post_id", postId);
+
       // Delete the post
       const { error } = await supabase.from("posts").delete().eq("id", postId);
 
@@ -44,7 +47,7 @@ export function DeletePostButton({ postId, postTitle }: DeletePostButtonProps) {
     <button
       onClick={handleDelete}
       disabled={loading}
-      className="text-sm text-red-500 hover:text-red-600 disabled:opacity-50"
+      className="text-sm text-red-500 hover:text-red-600 disabled:opacity-50 transition-colors"
     >
       {loading ? "삭제 중..." : "삭제"}
     </button>

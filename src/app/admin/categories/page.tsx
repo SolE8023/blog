@@ -28,12 +28,12 @@ export default async function AdminCategoriesPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
-          <h2 className="text-xl font-semibold mb-4">새 카테고리</h2>
+          <h2 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">새 카테고리</h2>
           <CategoryForm />
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-4">카테고리 목록</h2>
+          <h2 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">카테고리 목록</h2>
           <CategoryList categories={categories} />
         </div>
       </div>

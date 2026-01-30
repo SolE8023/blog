@@ -48,8 +48,8 @@ export function CategoryList({ categories }: CategoryListProps) {
 
   if (categories.length === 0) {
     return (
-      <div className="text-center py-8 border rounded-lg bg-gray-50 dark:bg-neutral-800">
-        <p className="text-gray-500 dark:text-gray-400">
+      <div className="text-center py-8 border border-[var(--border-color)] rounded-lg bg-[var(--bg-secondary)]">
+        <p className="text-[var(--text-muted)]">
           등록된 카테고리가 없습니다.
         </p>
       </div>
@@ -57,27 +57,27 @@ export function CategoryList({ categories }: CategoryListProps) {
   }
 
   return (
-    <div className="border rounded-lg overflow-hidden">
+    <div className="border border-[var(--border-color)] rounded-lg overflow-hidden">
       <table className="w-full">
-        <thead className="bg-gray-50 dark:bg-neutral-800">
+        <thead className="bg-[var(--bg-secondary)]">
           <tr>
             <th className="px-4 py-3 text-left text-sm font-medium">이름</th>
             <th className="px-4 py-3 text-left text-sm font-medium">슬러그</th>
             <th className="px-4 py-3 text-right text-sm font-medium">작업</th>
           </tr>
         </thead>
-        <tbody className="divide-y">
+        <tbody className="divide-y divide-[var(--border-color)]">
           {categories.map((category) => (
-            <tr key={category.id} className="hover:bg-gray-50 dark:hover:bg-neutral-800">
+            <tr key={category.id} className="hover:bg-[var(--bg-secondary)] transition-colors">
               <td className="px-4 py-3 font-medium">{category.name}</td>
-              <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+              <td className="px-4 py-3 text-sm text-[var(--text-muted)]">
                 {category.slug}
               </td>
               <td className="px-4 py-3 text-right">
                 <button
                   onClick={() => handleDelete(category)}
                   disabled={deletingId === category.id}
-                  className="text-sm text-red-500 hover:text-red-600 disabled:opacity-50"
+                  className="text-sm text-red-500 hover:text-red-600 disabled:opacity-50 transition-colors"
                 >
                   {deletingId === category.id ? "삭제 중..." : "삭제"}
                 </button>

@@ -28,12 +28,12 @@ export default async function AdminTagsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
-          <h2 className="text-xl font-semibold mb-4">새 태그</h2>
+          <h2 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">새 태그</h2>
           <TagForm />
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-4">태그 목록</h2>
+          <h2 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">태그 목록</h2>
           <TagList tags={tags} />
         </div>
       </div>
