@@ -42,28 +42,28 @@ export function TagList({ tags }: TagListProps) {
 
   if (tags.length === 0) {
     return (
-      <div className="text-center py-8 border border-[var(--border-color)] rounded-lg bg-[var(--bg-secondary)]">
+      <div className="text-center py-8 border border-[var(--border)] bg-[var(--bg-secondary)]">
         <p className="text-[var(--text-muted)]">
-          등록된 태그가 없습니다.
+          태그 없음
         </p>
       </div>
     );
   }
 
   return (
-    <div className="border border-[var(--border-color)] rounded-lg overflow-hidden">
+    <div className="border border-[var(--border)] overflow-hidden">
       <table className="w-full">
         <thead className="bg-[var(--bg-secondary)]">
           <tr>
-            <th className="px-4 py-3 text-left text-sm font-medium">이름</th>
-            <th className="px-4 py-3 text-left text-sm font-medium">슬러그</th>
-            <th className="px-4 py-3 text-right text-sm font-medium">작업</th>
+            <th className="px-4 py-3 text-left text-xs font-medium text-[var(--text-muted)] tracking-wide">이름</th>
+            <th className="px-4 py-3 text-left text-xs font-medium text-[var(--text-muted)] tracking-wide">슬러그</th>
+            <th className="px-4 py-3 text-right text-xs font-medium text-[var(--text-muted)] tracking-wide">작업</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-[var(--border-color)]">
+        <tbody className="divide-y divide-[var(--border)]">
           {tags.map((tag) => (
             <tr key={tag.id} className="hover:bg-[var(--bg-secondary)] transition-colors">
-              <td className="px-4 py-3 font-medium">#{tag.name}</td>
+              <td className="px-4 py-3 text-sm">{tag.name}</td>
               <td className="px-4 py-3 text-sm text-[var(--text-muted)]">
                 {tag.slug}
               </td>
@@ -71,9 +71,9 @@ export function TagList({ tags }: TagListProps) {
                 <button
                   onClick={() => handleDelete(tag)}
                   disabled={deletingId === tag.id}
-                  className="text-sm text-red-500 hover:text-red-600 disabled:opacity-50 transition-colors"
+                  className="text-sm text-[var(--text-muted)] hover:text-red-500 disabled:opacity-50 transition-colors"
                 >
-                  {deletingId === tag.id ? "삭제 중..." : "삭제"}
+                  {deletingId === tag.id ? "..." : "삭제"}
                 </button>
               </td>
             </tr>

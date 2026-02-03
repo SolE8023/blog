@@ -37,18 +37,21 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-[calc(100vh-8rem)] flex items-center justify-center">
-      <div className="w-full max-w-md p-8 border rounded-lg bg-white dark:bg-neutral-800">
-        <h1 className="text-2xl font-bold text-center mb-6">관리자 로그인</h1>
+      <div className="w-full max-w-sm p-8 border border-[var(--border)] bg-[var(--bg-card)]">
+        <div className="text-center mb-8">
+          <div className="ensou-small mb-6 mx-auto" />
+          <h1 className="text-xl font-normal tracking-wide">관리자</h1>
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
-            <div className="p-3 text-sm text-red-500 bg-red-50 dark:bg-red-900/20 rounded-lg">
+            <div className="p-3 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               {error}
             </div>
           )}
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1">
+            <label htmlFor="email" className="block text-sm text-[var(--text-muted)] mb-2">
               이메일
             </label>
             <input
@@ -56,13 +59,13 @@ export default function AdminLoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg bg-white dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 bg-transparent border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-1">
+            <label htmlFor="password" className="block text-sm text-[var(--text-muted)] mb-2">
               비밀번호
             </label>
             <input
@@ -70,7 +73,7 @@ export default function AdminLoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg bg-white dark:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 bg-transparent border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
               required
             />
           </div>
@@ -78,9 +81,9 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full py-3 bg-[var(--text-primary)] text-[var(--bg-primary)] hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
           >
-            {loading ? "로그인 중..." : "로그인"}
+            {loading ? "..." : "로그인"}
           </button>
         </form>
       </div>

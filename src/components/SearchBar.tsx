@@ -25,7 +25,6 @@ export function SearchBar() {
     }
   }, [isOpen]);
 
-  // Close on click outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -39,7 +38,6 @@ export function SearchBar() {
     }
   }, [isOpen]);
 
-  // Close on Escape
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -56,26 +54,23 @@ export function SearchBar() {
   return (
     <div ref={containerRef} className="relative">
       {isOpen ? (
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-center animate-slide-in"
-        >
+        <form onSubmit={handleSubmit} className="flex items-center animate-fade-in">
           <div className="relative">
             <input
               ref={inputRef}
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="검색어를 입력하세요..."
-              className="w-56 pl-10 pr-4 py-2 text-body text-sm bg-[var(--bg-secondary)] border border-[var(--border)] rounded-full focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-all"
+              placeholder="검색..."
+              className="w-48 pl-9 pr-4 py-2 text-ui text-sm bg-[var(--bg-card)] border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.5}
+              strokeWidth={1}
               stroke="currentColor"
-              className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"
+              className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"
             >
               <path
                 strokeLinecap="round"
@@ -87,14 +82,14 @@ export function SearchBar() {
           <button
             type="button"
             onClick={() => setIsOpen(false)}
-            className="ml-2 w-8 h-8 flex items-center justify-center rounded-full text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-all"
-            aria-label="검색 닫기"
+            className="ml-2 w-8 h-8 flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
+            aria-label="닫기"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={1.5}
+              strokeWidth={1}
               stroke="currentColor"
               className="w-4 h-4"
             >
@@ -105,16 +100,16 @@ export function SearchBar() {
       ) : (
         <button
           onClick={() => setIsOpen(true)}
-          className="w-10 h-10 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all duration-300 group"
+          className="w-8 h-8 flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-300"
           aria-label="검색"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.5}
+            strokeWidth={1}
             stroke="currentColor"
-            className="w-5 h-5 group-hover:scale-110 transition-transform"
+            className="w-4 h-4"
           >
             <path
               strokeLinecap="round"

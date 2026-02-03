@@ -8,20 +8,20 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative w-10 h-10 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all duration-300 overflow-hidden group"
-      aria-label={theme === "light" ? "다크 모드로 전환" : "라이트 모드로 전환"}
+      className="w-8 h-8 flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-300"
+      aria-label={theme === "light" ? "다크 모드" : "라이트 모드"}
     >
-      {/* Sun Icon */}
+      {/* Sun */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        strokeWidth={1.5}
+        strokeWidth={1}
         stroke="currentColor"
-        className={`w-5 h-5 absolute transition-all duration-500 ${
+        className={`w-4 h-4 absolute transition-all duration-500 ${
           theme === "light"
-            ? "opacity-100 rotate-0 scale-100"
-            : "opacity-0 rotate-90 scale-0"
+            ? "opacity-100 rotate-0"
+            : "opacity-0 rotate-90"
         }`}
       >
         <path
@@ -31,17 +31,17 @@ export function ThemeToggle() {
         />
       </svg>
 
-      {/* Moon Icon */}
+      {/* Moon */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        strokeWidth={1.5}
+        strokeWidth={1}
         stroke="currentColor"
-        className={`w-5 h-5 absolute transition-all duration-500 ${
+        className={`w-4 h-4 absolute transition-all duration-500 ${
           theme === "dark"
-            ? "opacity-100 rotate-0 scale-100"
-            : "opacity-0 -rotate-90 scale-0"
+            ? "opacity-100 rotate-0"
+            : "opacity-0 -rotate-90"
         }`}
       >
         <path
@@ -50,9 +50,6 @@ export function ThemeToggle() {
           d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
         />
       </svg>
-
-      {/* Hover Ring Effect */}
-      <span className="absolute inset-0 rounded-full bg-[var(--accent)] opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
     </button>
   );
 }

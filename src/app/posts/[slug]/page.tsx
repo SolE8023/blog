@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { createClient } from "@/lib/supabase-server";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { Comments } from "@/components/Comments";
@@ -75,193 +74,122 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <article className="min-h-screen">
-      {/* Hero Section */}
-      <header className="relative">
-        {post.thumbnail ? (
-          <div className="relative h-[50vh] md:h-[60vh]">
-            <Image
-              src={post.thumbnail}
-              alt={post.title}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent" />
-            <div className="absolute inset-0 bg-black/20" />
+      {/* 헤더 - 고요한 시작 */}
+      <header className="zen-container py-20 md:py-28">
+        <div className="zen-narrow text-center">
+          {/* 원상 심볼 */}
+          <div className="ensou-small mx-auto mb-10 animate-fade-in" />
+
+          {/* 카테고리 */}
+          {post.category && (
+            <Link
+              href={`/categories/${post.category.slug}`}
+              className="text-ui text-xs tracking-widest text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors mb-6 block animate-fade-in-up"
+            >
+              {post.category.name}
+            </Link>
+          )}
+
+          {/* 제목 */}
+          <h1 className="text-display text-2xl md:text-3xl lg:text-4xl font-bold tracking-wide leading-relaxed mb-8 animate-fade-in-up stagger-1">
+            {post.title}
+          </h1>
+
+          {/* 메타 정보 */}
+          <div className="flex items-center justify-center gap-4 text-ui text-xs tracking-wider text-[var(--text-muted)] animate-fade-in-up stagger-2">
+            <time>{formatDate(post.created_at)}</time>
+            <span className="opacity-30">·</span>
+            <ViewCounter postId={post.id} />
           </div>
-        ) : (
-          <div className="h-32 md:h-48 bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-card)]" />
-        )}
 
-        {/* Title Overlay */}
-        <div className="editorial-container relative -mt-32 md:-mt-40 pb-12">
-          <div className="max-w-3xl">
-            {/* Meta */}
-            <div className="flex items-center gap-4 mb-6 animate-fade-in-up">
-              {post.category && (
-                <Link
-                  href={`/categories/${post.category.slug}`}
-                  className="tag-editorial bg-[var(--bg-primary)]/90 backdrop-blur-sm"
-                >
-                  {post.category.name}
-                </Link>
-              )}
-              <time className="text-body text-sm text-[var(--text-muted)]">
-                {formatDate(post.created_at)}
-              </time>
-              <span className="text-[var(--text-muted)]">·</span>
-              <ViewCounter postId={post.id} />
-            </div>
+          {/* 잉크 라인 */}
+          <div className="ink-line mx-auto mt-12 animate-fade-in-up stagger-3" />
+        </div>
+      </header>
 
-            {/* Title */}
-            <h1 className="text-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 animate-fade-in-up stagger-1">
-              {post.title}
-            </h1>
+      {/* 본문 */}
+      <div className="zen-container pb-20">
+        <div className="zen-narrow">
+          {/* 콘텐츠 */}
+          <div className="prose-zen animate-fade-in-up stagger-3">
+            <MarkdownRenderer content={post.content} />
+          </div>
 
-            {/* Tags */}
-            {post.tags && post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-3 animate-fade-in-up stagger-2">
+          {/* 태그 */}
+          {post.tags && post.tags.length > 0 && (
+            <div className="mt-20 pt-12 border-t border-[var(--border)]">
+              <div className="flex flex-wrap justify-center gap-4">
                 {post.tags.map((tag) => (
                   <Link
                     key={tag.id}
                     href={`/tags/${tag.slug}`}
-                    className="text-body text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+                    className="zen-tag"
                   >
                     #{tag.name}
                   </Link>
                 ))}
               </div>
-            )}
-          </div>
-        </div>
-      </header>
-
-      {/* Content */}
-      <div className="editorial-container pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Main Content */}
-          <div className="lg:col-span-8">
-            <div className="prose-editorial animate-fade-in-up stagger-3">
-              <MarkdownRenderer content={post.content} />
             </div>
+          )}
 
-            {/* Divider */}
-            <div className="my-12 divider" />
-
-            {/* Author / Share Section */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 py-8 border-t border-b border-[var(--border)]">
+          {/* 하단 정보 */}
+          <div className="mt-20 py-12 border-t border-[var(--border)]">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
               <div>
-                <p className="text-body text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2">
+                <p className="text-ui text-xs tracking-widest text-[var(--text-muted)] mb-2">
                   발행일
                 </p>
-                <p className="text-body text-[var(--text-secondary)]">
+                <p className="text-body text-sm text-[var(--text-secondary)]">
                   {formatDate(post.created_at)}
                 </p>
               </div>
 
               <div className="flex items-center gap-4">
-                <span className="text-body text-xs uppercase tracking-widest text-[var(--text-muted)]">
-                  공유하기
+                <span className="text-ui text-xs tracking-widest text-[var(--text-muted)]">
+                  공유
                 </span>
-                <div className="flex items-center gap-2">
-                  <ShareButton
-                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
-                    label="트위터"
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
-                  </ShareButton>
-                  <ShareButton
-                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
-                    label="링크드인"
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                    </svg>
-                  </ShareButton>
-                </div>
-              </div>
-            </div>
-
-            {/* Navigation */}
-            <div className="mt-8">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-body text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors group"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 group-hover:-translate-x-1 transition-transform"
+                <ShareButton
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}`}
+                  label="Twitter"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                </svg>
-                모든 글 보기
-              </Link>
-            </div>
-
-            {/* Comments */}
-            <div className="mt-16">
-              <h3 className="text-display text-2xl font-semibold mb-8 accent-line">
-                댓글
-              </h3>
-              <Comments slug={slug} />
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </ShareButton>
+              </div>
             </div>
           </div>
 
-          {/* Sidebar */}
-          <aside className="lg:col-span-4">
-            <div className="sticky top-24 space-y-8">
-              {/* Table of Contents placeholder */}
-              <div className="p-6 rounded-xl border border-[var(--border)] bg-[var(--bg-card)]">
-                <h4 className="text-display text-lg font-semibold mb-4">
-                  이 글 소개
-                </h4>
-                {post.excerpt && (
-                  <p className="text-body text-sm text-[var(--text-muted)] leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                )}
-                {post.category && (
-                  <div className="mt-4 pt-4 border-t border-[var(--border)]">
-                    <p className="text-body text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2">
-                      카테고리
-                    </p>
-                    <Link
-                      href={`/categories/${post.category.slug}`}
-                      className="text-body text-[var(--accent)] hover:underline"
-                    >
-                      {post.category.name}
-                    </Link>
-                  </div>
-                )}
-              </div>
+          {/* 돌아가기 */}
+          <div className="mt-12 text-center">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-3 text-ui text-sm tracking-wider text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors group"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1}
+                stroke="currentColor"
+                className="w-4 h-4 group-hover:-translate-x-1 transition-transform"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+              </svg>
+              돌아가기
+            </Link>
+          </div>
 
-              {/* Related Tags */}
-              {post.tags && post.tags.length > 0 && (
-                <div className="p-6 rounded-xl border border-[var(--border)] bg-[var(--bg-card)]">
-                  <h4 className="text-display text-lg font-semibold mb-4">
-                    관련 태그
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                      <Link
-                        key={tag.id}
-                        href={`/tags/${tag.slug}`}
-                        className="tag-editorial"
-                      >
-                        {tag.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
+          {/* 댓글 */}
+          <div className="mt-24">
+            <div className="zen-divider" />
+            <div className="text-center mb-12">
+              <h3 className="text-display text-lg tracking-widest text-[var(--text-muted)]">
+                이야기
+              </h3>
             </div>
-          </aside>
+            <Comments slug={slug} />
+          </div>
         </div>
       </div>
     </article>
@@ -275,15 +203,15 @@ function ShareButton({
 }: {
   href: string;
   label: string;
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-8 h-8 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all"
-      aria-label={`${label}에 공유하기`}
+      className="w-8 h-8 flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
+      aria-label={`${label}에 공유`}
     >
       {children}
     </a>
@@ -313,7 +241,7 @@ export async function generateMetadata({ params }: PostPageProps) {
       url,
       title: post.title,
       description: post.excerpt || undefined,
-      siteName: "Log.",
+      siteName: "適",
       publishedTime: post.created_at,
       modifiedTime: post.updated_at,
       ...(post.thumbnail && { images: [{ url: post.thumbnail }] }),

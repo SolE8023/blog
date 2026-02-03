@@ -84,7 +84,7 @@ export function AdminAuthProvider({ children }: AdminAuthProviderProps) {
     <AdminAuthContext.Provider value={{ user, loading, signOut }}>
       {/* Admin Top Bar */}
       <div className="bg-[var(--bg-secondary)] border-b border-[var(--border)] mb-8">
-        <div className="editorial-container">
+        <div className="zen-container">
           <div className="flex items-center justify-between h-12">
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />

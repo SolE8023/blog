@@ -19,8 +19,8 @@ export default async function NewPostPage() {
   const { categories, tags } = await getCategoriesAndTags();
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">새 게시물</h1>
+    <div className="admin-ui">
+      <h1 className="text-2xl font-semibold mb-8">새 글</h1>
       <PostForm categories={categories} tags={tags} />
     </div>
   );

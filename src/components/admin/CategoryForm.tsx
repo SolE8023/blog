@@ -48,38 +48,38 @@ export function CategoryForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border border-[var(--border-color)] rounded-lg bg-[var(--bg-secondary)]">
+    <form onSubmit={handleSubmit} className="p-4 border border-[var(--border)] bg-[var(--bg-secondary)]">
       {error && (
-        <div className="mb-4 p-3 text-sm text-red-500 bg-red-50 dark:bg-red-900/20 rounded-lg">
+        <div className="mb-4 p-3 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
           {error}
         </div>
       )}
 
       <div className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium mb-1">
-            이름 *
+          <label htmlFor="name" className="block text-sm text-[var(--text-muted)] mb-2">
+            이름
           </label>
           <input
             id="name"
             type="text"
             value={name}
             onChange={(e) => handleNameChange(e.target.value)}
-            className="w-full px-4 py-2 border border-[var(--border-color)] rounded-lg bg-[var(--bg-card)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent"
+            className="w-full px-4 py-2 bg-transparent border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
             required
           />
         </div>
 
         <div>
-          <label htmlFor="slug" className="block text-sm font-medium mb-1">
-            슬러그 *
+          <label htmlFor="slug" className="block text-sm text-[var(--text-muted)] mb-2">
+            슬러그
           </label>
           <input
             id="slug"
             type="text"
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
-            className="w-full px-4 py-2 border border-[var(--border-color)] rounded-lg bg-[var(--bg-card)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent"
+            className="w-full px-4 py-2 bg-transparent border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
             required
           />
         </div>
@@ -87,9 +87,9 @@ export function CategoryForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 px-4 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full py-2 bg-[var(--text-primary)] text-[var(--bg-primary)] hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
         >
-          {loading ? "저장 중..." : "추가하기"}
+          {loading ? "..." : "추가"}
         </button>
       </div>
     </form>

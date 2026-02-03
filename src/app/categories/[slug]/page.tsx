@@ -91,28 +91,33 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category, posts } = data;
 
   return (
-    <div>
-      <div className="mb-8">
+    <div className="zen-container py-16 md:py-24">
+      {/* Header */}
+      <header className="text-center mb-16">
         <Link
           href="/categories"
-          className="text-blue-500 hover:text-blue-600 text-sm mb-2 inline-block"
+          className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors mb-8 inline-block"
         >
-          &larr; 모든 카테고리
+          ← 카테고리
         </Link>
-        <h1 className="text-3xl font-bold">{category.name}</h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-2">
-          {posts.length}개의 글
+        <div className="ensou-small mb-8" />
+        <h1 className="text-2xl md:text-3xl font-normal tracking-wide mb-4">
+          {category.name}
+        </h1>
+        <p className="text-sm text-[var(--text-muted)]">
+          {posts.length}편의 글
         </p>
-      </div>
+      </header>
 
+      {/* Posts */}
       {posts.length === 0 ? (
-        <div className="text-center py-12 border rounded-lg bg-gray-50 dark:bg-neutral-800">
-          <p className="text-gray-500 dark:text-gray-400">
-            이 카테고리에 글이 없습니다.
+        <div className="text-center py-16">
+          <p className="text-[var(--text-muted)]">
+            이 카테고리에 글이 없습니다
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="zen-narrow space-y-1">
           {posts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
@@ -131,7 +136,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   }
 
   return {
-    title: `${data.category.name} | My Blog`,
+    title: data.category.name,
     description: `${data.category.name} 카테고리의 글 목록`,
   };
 }

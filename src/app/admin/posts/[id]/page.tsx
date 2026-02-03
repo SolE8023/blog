@@ -58,8 +58,8 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
   const selectedTagIds = post.post_tags?.map((pt) => pt.tag_id) || [];
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">게시물 수정</h1>
+    <div className="admin-ui">
+      <h1 className="text-2xl font-semibold mb-8">글 수정</h1>
       <PostForm
         post={post}
         categories={categories}

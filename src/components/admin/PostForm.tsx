@@ -120,7 +120,7 @@ export function PostForm({ post, categories, tags, selectedTagIds = [] }: PostFo
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <div className="p-3 text-sm text-red-500 bg-red-50 dark:bg-red-900/20 rounded-lg">
+        <div className="p-3 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
           {error}
         </div>
       )}
@@ -129,49 +129,49 @@ export function PostForm({ post, categories, tags, selectedTagIds = [] }: PostFo
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
           <div>
-            <label htmlFor="title" className="block text-sm font-medium mb-1">
-              제목 *
+            <label htmlFor="title" className="block text-sm text-[var(--text-muted)] mb-2">
+              제목
             </label>
             <input
               id="title"
               type="text"
               value={title}
               onChange={(e) => handleTitleChange(e.target.value)}
-              className="w-full px-4 py-2 border border-[var(--border-color)] rounded-lg bg-[var(--bg-card)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent"
+              className="w-full px-4 py-3 bg-transparent border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="slug" className="block text-sm font-medium mb-1">
-              슬러그 *
+            <label htmlFor="slug" className="block text-sm text-[var(--text-muted)] mb-2">
+              슬러그
             </label>
             <input
               id="slug"
               type="text"
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
-              className="w-full px-4 py-2 border border-[var(--border-color)] rounded-lg bg-[var(--bg-card)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent"
+              className="w-full px-4 py-3 bg-transparent border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="content" className="block text-sm font-medium mb-1">
-              내용 (Markdown) *
+            <label htmlFor="content" className="block text-sm text-[var(--text-muted)] mb-2">
+              내용
             </label>
             <textarea
               id="content"
               value={content}
               onChange={(e) => handleContentChange(e.target.value)}
               rows={20}
-              className="w-full px-4 py-2 border border-[var(--border-color)] rounded-lg bg-[var(--bg-card)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent font-mono text-sm"
+              className="w-full px-4 py-3 bg-transparent border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors font-mono text-sm"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="excerpt" className="block text-sm font-medium mb-1">
+            <label htmlFor="excerpt" className="block text-sm text-[var(--text-muted)] mb-2">
               요약
             </label>
             <textarea
@@ -179,29 +179,29 @@ export function PostForm({ post, categories, tags, selectedTagIds = [] }: PostFo
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
               rows={3}
-              className="w-full px-4 py-2 border border-[var(--border-color)] rounded-lg bg-[var(--bg-card)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent"
+              className="w-full px-4 py-3 bg-transparent border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
             />
           </div>
         </div>
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <div className="p-4 border border-[var(--border-color)] rounded-lg bg-[var(--bg-secondary)]">
-            <h3 className="font-medium mb-4">발행 설정</h3>
+          <div className="p-4 border border-[var(--border)] bg-[var(--bg-secondary)]">
+            <h3 className="text-sm text-[var(--text-muted)] mb-4">발행</h3>
 
             <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
                 checked={published}
                 onChange={(e) => setPublished(e.target.checked)}
-                className="w-4 h-4 rounded accent-[var(--accent)]"
+                className="w-4 h-4"
               />
               <span className="text-sm">발행하기</span>
             </label>
           </div>
 
-          <div className="p-4 border border-[var(--border-color)] rounded-lg bg-[var(--bg-secondary)]">
-            <label htmlFor="thumbnail" className="block text-sm font-medium mb-2">
+          <div className="p-4 border border-[var(--border)] bg-[var(--bg-secondary)]">
+            <label htmlFor="thumbnail" className="block text-sm text-[var(--text-muted)] mb-2">
               썸네일 URL
             </label>
             <input
@@ -210,19 +210,19 @@ export function PostForm({ post, categories, tags, selectedTagIds = [] }: PostFo
               value={thumbnail}
               onChange={(e) => setThumbnail(e.target.value)}
               placeholder="https://..."
-              className="w-full px-3 py-2 text-sm border border-[var(--border-color)] rounded-lg bg-[var(--bg-card)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent"
+              className="w-full px-3 py-2 text-sm bg-transparent border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
             />
           </div>
 
-          <div className="p-4 border border-[var(--border-color)] rounded-lg bg-[var(--bg-secondary)]">
-            <label htmlFor="category" className="block text-sm font-medium mb-2">
+          <div className="p-4 border border-[var(--border)] bg-[var(--bg-secondary)]">
+            <label htmlFor="category" className="block text-sm text-[var(--text-muted)] mb-2">
               카테고리
             </label>
             <select
               id="category"
               value={categoryId}
               onChange={(e) => setCategoryId(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-[var(--border-color)] rounded-lg bg-[var(--bg-card)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent"
+              className="w-full px-3 py-2 text-sm bg-transparent border border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
             >
               <option value="">선택 안함</option>
               {categories.map((category) => (
@@ -233,43 +233,43 @@ export function PostForm({ post, categories, tags, selectedTagIds = [] }: PostFo
             </select>
           </div>
 
-          <div className="p-4 border border-[var(--border-color)] rounded-lg bg-[var(--bg-secondary)]">
-            <h3 className="text-sm font-medium mb-2">태그</h3>
+          <div className="p-4 border border-[var(--border)] bg-[var(--bg-secondary)]">
+            <h3 className="text-sm text-[var(--text-muted)] mb-3">태그</h3>
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
                 <button
                   key={tag.id}
                   type="button"
                   onClick={() => toggleTag(tag.id)}
-                  className={`px-3 py-1 text-sm rounded-full border transition-colors ${
+                  className={`px-3 py-1 text-sm border transition-colors ${
                     selectedTags.includes(tag.id)
-                      ? "bg-[var(--accent)] text-white border-[var(--accent)]"
-                      : "bg-[var(--bg-card)] border-[var(--border-color)] hover:border-[var(--accent)]"
+                      ? "bg-[var(--text-primary)] text-[var(--bg-primary)] border-[var(--text-primary)]"
+                      : "bg-transparent border-[var(--border)] hover:border-[var(--text-muted)]"
                   }`}
                 >
-                  #{tag.name}
+                  {tag.name}
                 </button>
               ))}
               {tags.length === 0 && (
-                <p className="text-sm text-[var(--text-muted)]">등록된 태그가 없습니다.</p>
+                <p className="text-sm text-[var(--text-muted)]">태그 없음</p>
               )}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center gap-4 pt-4 border-t border-[var(--border-color)]">
+      <div className="flex items-center gap-4 pt-4 border-t border-[var(--border)]">
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-2 bg-[var(--text-primary)] text-[var(--bg-primary)] hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
         >
-          {loading ? "저장 중..." : isEditing ? "수정하기" : "작성하기"}
+          {loading ? "..." : isEditing ? "수정" : "작성"}
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-2 border border-[var(--border-color)] rounded-lg hover:bg-[var(--bg-secondary)] transition-colors"
+          className="px-6 py-2 border border-[var(--border)] hover:bg-[var(--bg-secondary)] transition-colors"
         >
           취소
         </button>

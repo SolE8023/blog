@@ -105,125 +105,61 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const posts = query ? await searchPosts(query) : await getAllPosts();
 
   return (
-    <div className="min-h-screen">
+    <div className="zen-container py-16 md:py-24">
       {/* Header */}
-      <section className="editorial-container py-16 md:py-24">
-        <div className="max-w-2xl">
-          <p className="text-body text-sm font-medium text-[var(--accent)] mb-4">
-            {query ? "검색 결과" : "글 목록"}
-          </p>
-          <h1 className="text-display text-4xl md:text-5xl font-bold leading-tight mb-6">
-            {query ? (
-              <>
-                <span className="text-[var(--accent)]">&ldquo;{query}&rdquo;</span>
-                <span className="text-[var(--text-muted)]"> 검색 결과</span>
-              </>
-            ) : (
-              "전체 글"
-            )}
-          </h1>
-          {query && (
-            <p className="text-body text-lg text-[var(--text-secondary)]">
-              총 {posts.length}개의 글을 찾았습니다.
-            </p>
+      <header className="text-center mb-12">
+        <div className="ensou-small mb-8" />
+        <h1 className="text-2xl md:text-3xl font-normal tracking-wide mb-4">
+          {query ? (
+            <>「{query}」</>
+          ) : (
+            "검색"
           )}
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="divider" />
+        </h1>
+        {query && (
+          <p className="text-sm text-[var(--text-muted)]">
+            {posts.length}편의 글
+          </p>
+        )}
+      </header>
 
       {/* Search Form */}
-      <section className="editorial-container py-12">
-        <form action="/search" method="GET" className="max-w-xl">
+      <div className="zen-narrow mb-12">
+        <form action="/search" method="GET">
           <div className="relative">
             <input
               type="text"
               name="q"
               defaultValue={query || ""}
-              placeholder="검색어를 입력하세요..."
-              className="w-full pl-12 pr-4 py-4 text-body text-lg bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-subtle)] transition-all"
+              placeholder="검색어를 입력하세요"
+              className="w-full px-4 py-3 text-center bg-transparent border-b border-[var(--border)] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
             />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              />
-            </svg>
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-2 btn-primary rounded-lg"
-            >
-              검색
-            </button>
           </div>
         </form>
-      </section>
+      </div>
 
       {/* Results */}
-      <section className="editorial-container py-12 pb-24">
-        {posts.length === 0 ? (
-          <div className="text-center py-16 border border-dashed border-[var(--border)] rounded-xl bg-[var(--bg-secondary)]">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--accent-subtle)] flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-[var(--accent)]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-display text-xl font-semibold mb-2">
-              검색 결과가 없습니다
-            </h3>
-            <p className="text-body text-[var(--text-muted)] mb-6">
-              {query
-                ? "다른 검색어로 다시 시도해보세요."
-                : "아직 게시된 글이 없습니다."}
-            </p>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-body text-sm font-medium text-[var(--accent)] hover:gap-3 transition-all"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-              </svg>
-              홈으로 돌아가기
-            </Link>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post, index) => (
-              <div
-                key={post.id}
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <PostCard post={post} />
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
+      {posts.length === 0 ? (
+        <div className="text-center py-16">
+          <p className="text-[var(--text-muted)] mb-6">
+            {query
+              ? "검색 결과가 없습니다"
+              : "아직 게시된 글이 없습니다"}
+          </p>
+          <Link
+            href="/"
+            className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+          >
+            ← 돌아가기
+          </Link>
+        </div>
+      ) : (
+        <div className="zen-narrow space-y-1">
+          {posts.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -232,7 +168,7 @@ export async function generateMetadata({ searchParams }: SearchPageProps) {
   const { q: query } = await searchParams;
 
   return {
-    title: query ? `"${query}" 검색 결과 | 필기장` : "검색 | 필기장",
+    title: query ? `「${query}」 검색` : "검색",
     description: "블로그 글 검색",
   };
 }

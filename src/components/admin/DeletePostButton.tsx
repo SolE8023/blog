@@ -47,9 +47,9 @@ export function DeletePostButton({ postId, postTitle }: DeletePostButtonProps) {
     <button
       onClick={handleDelete}
       disabled={loading}
-      className="text-sm text-red-500 hover:text-red-600 disabled:opacity-50 transition-colors"
+      className="text-sm text-[var(--text-muted)] hover:text-red-500 disabled:opacity-50 transition-colors"
     >
-      {loading ? "삭제 중..." : "삭제"}
+      {loading ? "..." : "삭제"}
     </button>
   );
 }

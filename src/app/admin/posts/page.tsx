@@ -49,49 +49,49 @@ export default async function AdminPostsPage() {
   const posts = await getPosts();
 
   return (
-    <div>
+    <div className="admin-ui">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">게시물 관리</h1>
+        <h1 className="text-2xl font-semibold">게시물</h1>
         <Link
           href="/admin/posts/new"
-          className="px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent-hover)] transition-colors"
+          className="px-4 py-2 text-ui text-sm bg-[var(--text-primary)] text-[var(--bg-primary)] hover:opacity-80 transition-opacity"
         >
-          새 게시물
+          새 글
         </Link>
       </div>
 
       {posts.length === 0 ? (
-        <div className="text-center py-12 border border-[var(--border-color)] rounded-lg bg-[var(--bg-secondary)]">
+        <div className="text-center py-12 border border-[var(--border)] bg-[var(--bg-secondary)]">
           <p className="text-[var(--text-muted)] mb-4">
-            게시물이 없습니다.
+            게시물이 없습니다
           </p>
           <Link
             href="/admin/posts/new"
-            className="text-[var(--accent)] hover:text-[var(--accent-hover)]"
+            className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
           >
             첫 번째 게시물 작성하기
           </Link>
         </div>
       ) : (
-        <div className="border border-[var(--border-color)] rounded-lg overflow-hidden">
+        <div className="border border-[var(--border)] overflow-hidden">
           <table className="w-full">
             <thead className="bg-[var(--bg-secondary)]">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium">제목</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">카테고리</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">상태</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">조회수</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">작성일</th>
-                <th className="px-4 py-3 text-right text-sm font-medium">작업</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[var(--text-muted)] tracking-wide">제목</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[var(--text-muted)] tracking-wide">카테고리</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[var(--text-muted)] tracking-wide">상태</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[var(--text-muted)] tracking-wide">조회</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[var(--text-muted)] tracking-wide">작성일</th>
+                <th className="px-4 py-3 text-right text-xs font-medium text-[var(--text-muted)] tracking-wide">작업</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[var(--border-color)]">
+            <tbody className="divide-y divide-[var(--border)]">
               {posts.map((post) => (
                 <tr key={post.id} className="hover:bg-[var(--bg-secondary)] transition-colors">
                   <td className="px-4 py-3">
                     <Link
                       href={`/admin/posts/${post.id}`}
-                      className="font-medium hover:text-[var(--accent)] transition-colors"
+                      className="text-sm font-medium hover:text-[var(--text-muted)] transition-colors"
                     >
                       {post.title}
                     </Link>
@@ -101,32 +101,26 @@ export default async function AdminPostsPage() {
                   </td>
                   <td className="px-4 py-3">
                     {post.published ? (
-                      <span className="inline-flex px-2 py-1 text-xs rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
-                        발행됨
+                      <span className="inline-flex px-2 py-0.5 text-xs rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
+                        발행
                       </span>
                     ) : (
-                      <span className="inline-flex px-2 py-1 text-xs rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400">
-                        임시저장
+                      <span className="inline-flex px-2 py-0.5 text-xs rounded bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400">
+                        임시
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-1.5 text-sm text-[var(--text-muted)]">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                      {post.view_count.toLocaleString()}
-                    </div>
+                  <td className="px-4 py-3 text-sm text-[var(--text-muted)]">
+                    {post.view_count.toLocaleString()}
                   </td>
                   <td className="px-4 py-3 text-sm text-[var(--text-muted)]">
                     {formatDate(post.created_at)}
                   </td>
                   <td className="px-4 py-3 text-right">
-                    <div className="flex items-center justify-end gap-2">
+                    <div className="flex items-center justify-end gap-3">
                       <Link
                         href={`/admin/posts/${post.id}`}
-                        className="text-sm text-[var(--accent)] hover:text-[var(--accent-hover)]"
+                        className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
                       >
                         수정
                       </Link>

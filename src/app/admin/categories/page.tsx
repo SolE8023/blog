@@ -23,17 +23,17 @@ export default async function AdminCategoriesPage() {
   const categories = await getCategories();
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">카테고리 관리</h1>
+    <div className="admin-ui">
+      <h1 className="text-2xl font-semibold mb-8">카테고리</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
-          <h2 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">새 카테고리</h2>
+          <h2 className="text-sm font-medium text-[var(--text-muted)] mb-4 tracking-wide">새 카테고리</h2>
           <CategoryForm />
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">카테고리 목록</h2>
+          <h2 className="text-sm font-medium text-[var(--text-muted)] mb-4 tracking-wide">카테고리 목록</h2>
           <CategoryList categories={categories} />
         </div>
       </div>

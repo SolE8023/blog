@@ -9,10 +9,10 @@ const BASE_URL = "https://blog-eight-kohl-50.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Log.",
-    template: "%s | Log.",
+    default: "適",
+    template: "%s | 適",
   },
-  description: "개발, 일상, 그리고 다양한 이야기들",
+  description: "고요히 기록하는 공간",
   icons: {
     icon: "/favicon.svg",
   },
@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     url: BASE_URL,
-    siteName: "Log.",
-    title: "Log.",
-    description: "개발, 일상, 그리고 다양한 이야기들",
+    siteName: "適",
+    title: "適",
+    description: "고요히 기록하는 공간",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Log.",
-    description: "개발, 일상, 그리고 다양한 이야기들",
+    title: "適",
+    description: "고요히 기록하는 공간",
   },
   robots: {
     index: true,
@@ -40,10 +40,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    // 나중에 Google Search Console 인증 시 추가
-    // google: "your-google-verification-code",
-  },
 };
 
 export default function RootLayout({
@@ -53,9 +49,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className="antialiased min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col">
         <ThemeProvider>
-          <div className="grain-overlay" aria-hidden="true" />
           <Header />
           <main className="flex-1">
             {children}

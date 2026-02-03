@@ -23,17 +23,17 @@ export default async function AdminTagsPage() {
   const tags = await getTags();
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">태그 관리</h1>
+    <div className="admin-ui">
+      <h1 className="text-2xl font-semibold mb-8">태그</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
-          <h2 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">새 태그</h2>
+          <h2 className="text-sm font-medium text-[var(--text-muted)] mb-4 tracking-wide">새 태그</h2>
           <TagForm />
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-4 text-[var(--text-primary)]">태그 목록</h2>
+          <h2 className="text-sm font-medium text-[var(--text-muted)] mb-4 tracking-wide">태그 목록</h2>
           <TagList tags={tags} />
         </div>
       </div>
